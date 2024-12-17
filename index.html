@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoCard - Digital Card Management</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #0a0a0a;
+            scrollbar-width: thin;
+            scrollbar-color: #333 #000;
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #4ECDC4, #45B7D1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .card-hover:hover {
+            transform: scale(1.05);
+            transition: transform 0.3s ease-in-out;
+        }
+        .bg-pattern {
+            background-image: 
+                linear-gradient(rgba(14, 165, 233, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(14, 165, 233, 0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        .card-glow {
+            box-shadow: 0 0 15px rgba(14, 165, 233, 0.3), 
+                        0 0 30px rgba(14, 165, 233, 0.2),
+                        0 0 45px rgba(14, 165, 233, 0.1);
+        }
+        .circle-decoration {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.1;
+            z-index: -1;
+            background: radial-gradient(circle, rgba(14, 165, 233, 0.2) 0%, transparent 70%);
+        }
+        .footer-circle-1 {
+            top: -100px;
+            left: -100px;
+            width: 300px;
+            height: 300px;
+        }
+        .footer-circle-2 {
+            bottom: -150px;
+            right: -150px;
+            width: 400px;
+            height: 400px;
+        }
+    </style>
+</head>
+<body class="text-white font-sans bg-pattern">
+    <header class="fixed top-0 left-0 w-full bg-black/50 backdrop-blur-sm z-50">
+        <nav class="container mx-auto flex justify-between items-center p-4">
+            <div class="text-2xl font-bold gradient-text">EcoCard</div>
+            <div class="space-x-4">
+                <a href="#features" class="hover:text-cyan-400 transition">Features</a>
+                <a href="#about" class="hover:text-cyan-400 transition">About</a>
+                <a href="#contact" class="hover:text-cyan-400 transition">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="min-h-screen flex items-center justify-center relative overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-br from-black via-black to-gray-900 opacity-75"></div>
+            <div class="container mx-auto px-4 relative z-10 text-center">
+                <h1 class="text-5xl md:text-6xl font-bold mb-6 gradient-text">
+                    Your Digital Card Companion
+                </h1>
+                <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+                    The Must-Have App for Travelers and Vacationers
+                </p>
+                <div class="space-x-4">
+                    <a href="#" class="bg-cyan-600 hover:bg-cyan-700 text-white px-8 py-3 rounded-full transition">
+                        Get Started
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- App Showcase -->
+        <section class="py-20 bg-black">
+            <div class="container mx-auto px-4">
+                <h2 class="text-4xl text-center mb-12 gradient-text">How It Works</h2>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="text-center card-hover card-glow p-6 rounded-xl">
+                        <img src="/api/placeholder/300/200" alt="Scanning GIF" class="rounded-xl mx-auto mb-4 shadow-lg">
+                        <h3 class="text-xl font-semibold mb-2">Scan Cards Instantly</h3>
+                        <p class="text-gray-400">Quickly digitize your physical cards</p>
+                    </div>
+                    <div class="text-center card-hover card-glow p-6 rounded-xl">
+                        <img src="/api/placeholder/300/200" alt="Organizing GIF" class="rounded-xl mx-auto mb-4 shadow-lg">
+                        <h3 class="text-xl font-semibold mb-2">Organize Effortlessly</h3>
+                        <p class="text-gray-400">Manage cards with smart categorization</p>
+                    </div>
+                    <div class="text-center card-hover card-glow p-6 rounded-xl">
+                        <img src="/api/placeholder/300/200" alt="Accessing GIF" class="rounded-xl mx-auto mb-4 shadow-lg">
+                        <h3 class="text-xl font-semibold mb-2">Access Anywhere</h3>
+                        <p class="text-gray-400">Find cards by location or category</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Advanced Features Section -->
+        <section class="py-20 bg-gray-900">
+            <div class="container mx-auto px-4">
+                <h2 class="text-4xl text-center mb-12 gradient-text">Advanced Features</h2>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="text-center card-hover card-glow p-6 rounded-xl">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto mb-4 text-cyan-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                        </svg>
+                        <h3 class="text-xl font-semibold mb-2">End-to-End Encryption</h3>
+                        <p class="text-gray-400">Protect your sensitive card information</p>
+                    </div>
+                    <div class="text-center card-hover card-glow p-6 rounded-xl">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto mb-4 text-cyan-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                        <h3 class="text-xl font-semibold mb-2">Location-Based Display</h3>
+                        <p class="text-gray-400">Cards are displayed based on your location</p>
+                    </div>
+                    <div class="text-center card-hover card-glow p-6 rounded-xl">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto mb-4 text-cyan-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                        </svg>
+                        <h3 class="text-xl font-semibold mb-2">Best Local Discounts</h3>
+                        <p class="text-gray-400">Unlock exclusive discount offers locally</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Us Section -->
+        <section id="about" class="py-20 bg-black">
+            <div class="container mx-auto px-4">
+                <h2 class="text-4xl text-center mb-12 gradient-text">About EcoCard</h2>
+                <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-4 text-cyan-500">Our Mission</h3>
+                        <p class="text-gray-300 mb-4">
+                            EcoCard was designed with travelers in mind. We understand the hassle of managing multiple cards while exploring new destinations.
+                        </p>
+                        <p class="text-gray-300">
+                            Our app simplifies your travel experience by keeping all your cards organized, accessible, and ready when you need them most.
+                        </p>
+                    </div>
+                    <div>
+                        <img src="/api/placeholder/500/400" alt="Team Photo" class="rounded-xl shadow-lg">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Support Contact Section -->
+        <section id="contact" class="py-20 bg-gray-900">
+            <div class="container mx-auto px-4">
+                <h2 class="text-4xl text-center mb-12 gradient-text">Contact Support</h2>
+                <div class="max-w-xl mx-auto">
+                    <form class="space-y-4">
+                        <div>
+                            <label class="block text-gray-300 mb-2">Name</label>
+                            <input type="text" class="w-full bg-gray-800 text-white p-3 rounded-lg" placeholder="Your Name">
+                        </div>
+                        <div>
+                            <label class="block text-gray-300 mb-2">Email</label>
+                            <input type="email" class="w-full bg-gray-800 text-white p-3 rounded-lg" placeholder="Your Email">
+                        </div>
+                        <div>
+                            <label class="block text-gray-300 mb-2">Message</label>
+                            <textarea class="w-full bg-gray-800 text-white p-3 rounded-lg" rows="4" placeholder="Your Support Request"></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-cyan-600 hover:bg-cyan-700 text-white p-3 rounded-lg transition">
+                            Send Support Request
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer-bg bg-black py-12 relative overflow-hidden">
+        <div class="absolute circle-decoration footer-circle-1"></div>
+        <div class="absolute circle-decoration footer-circle-2"></div>
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="grid md:grid-cols-3 gap-8 text-center">
+                <div>
+                    <h4 class="text-xl font-semibold mb-4 text-cyan-500">Address</h4>
+                    <p class="text-gray-300">
+                        EcoCard Support Center<br>
+                        123 Digital Lane<br>
+                        Tech City, Innovation State<br>
+                        12345, USA
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-xl font-semibold mb-4 text-cyan-500">Contact</h4>
+                    <p class="text-gray-300">
+                        Phone: (555) 123-4567<br>
+                        Email: support@ecocard.com<br>
+                        Business Hours: 9 AM - 5 PM EST
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-xl font-semibold mb-4 text-cyan-500">Social Media</h4>
+                    <div class="flex justify-center space-x-4">
+                        <a href="#" class="text-gray-300 hover:text-cyan-500">Twitter</a>
+                        <a href="#" class="text-gray-300 hover:text-cyan-500">LinkedIn</a>
+                        <a href="#" class="text-gray-300 hover:text-cyan-500">Instagram</a>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-8">
+                <p class="text-gray-400">© 2024 EcoCard. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
