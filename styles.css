@@ -1,0 +1,177 @@
+:root {
+    --bg-primary: #121212;
+    --bg-secondary: #1e1e1e;
+    --accent-color: #38bdf8;
+    --text-primary: #e0e0e0;
+}
+
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+}
+
+/* Artistic Background Designs */
+.bg-liquid-gradient {
+    background: linear-gradient(
+        -45deg, 
+        #ee7752, 
+        #e73c7e, 
+        #23a6d5, 
+        #23d5ab
+    );
+    background-size: 400% 400%;
+    animation: gradient-flow 15s ease infinite;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.1;
+    z-index: -1;
+}
+
+@keyframes gradient-flow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.bg-particle-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    opacity: 0.05;
+    z-index: -1;
+}
+
+.parallax-bg {
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.glass-morphism {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.125);
+}
+
+.gradient-text {
+    background: linear-gradient(to right, var(--accent-color), #0ea5e9);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.section-transform {
+    transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.section-transform:hover {
+    transform: scale(1.02);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+}
+
+.svg-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.05;
+    z-index: -1;
+}
+
+.hero-image {
+    height: 500px; /* Fixed height for hero image */
+    width: auto;
+    object-fit: contain;
+}
+
+.feature-image-container {
+    height: 256px; /* This matches the w-64 class (64 * 4px = 256px) */
+    overflow: hidden;
+    position: relative;
+}
+
+.feature-image-scroll {
+    position: absolute;
+    height: 200%;
+    width: 100%;
+    object-fit: cover;
+    animation: scrollImage 15s linear infinite;
+}
+
+@keyframes scrollImage {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-50%);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+/* Optional: Pause animation on hover */
+.feature-image-container:hover .feature-image-scroll {
+    animation-play-state: paused;
+}
+
+@media (max-width: 768px) {
+    .hero-section {
+        padding-top: 6rem; /* Add padding to prevent header overlap */
+    }
+
+    .hero-text {
+        text-align: center;
+    }
+
+    #mobile-menu {
+        animation: slideDown 0.3s ease-out;
+    }
+
+    @keyframes slideDown {
+        from {
+            transform: translateY(-10px);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+}
+
+.about-pattern {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 20%, rgba(56, 189, 248, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(56, 189, 248, 0.03) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.about-lines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        linear-gradient(45deg, transparent 48%, rgba(56, 189, 248, 0.02) 49%, rgba(56, 189, 248, 0.02) 51%, transparent 52%) 0 0/60px 60px,
+        linear-gradient(-45deg, transparent 48%, rgba(56, 189, 248, 0.02) 49%, rgba(56, 189, 248, 0.02) 51%, transparent 52%) 0 0/60px 60px;
+    pointer-events: none;
+    z-index: 1;
+}
