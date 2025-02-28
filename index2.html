@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoCard Laptop Initiative - Bridging the Digital Divide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <style>
+        :root {
+            --bg-primary: #121212;
+            --bg-secondary: #1e1e1e;
+            --accent-color: #38bdf8;
+            --text-primary: #e0e0e0;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Artistic Background Designs */
+        .bg-liquid-gradient {
+            background: linear-gradient(
+                -45deg, 
+                #23d5ab, 
+                #23a6d5, 
+                #4b34e9, 
+                #8a2be2
+            );
+            background-size: 400% 400%;
+            animation: gradient-flow 15s ease infinite;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+            z-index: -1;
+        }
+
+        @keyframes gradient-flow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .svg-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.05;
+            z-index: -1;
+        }
+
+        .glass-morphism {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.125);
+        }
+
+        .gradient-text {
+            background: linear-gradient(to right, #8a2be2, #4b34e9);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-image {
+            height: 500px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .feature-image-container {
+            height: 256px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .feature-image-scroll {
+            position: absolute;
+            height: 200%;
+            width: 100%;
+            object-fit: cover;
+            animation: scrollImage 15s linear infinite;
+        }
+
+        @keyframes scrollImage {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-50%);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        .feature-image-container:hover .feature-image-scroll {
+            animation-play-state: paused;
+        }
+
+        @media (max-width: 768px) {
+            .hero-section {
+                padding-top: 6rem;
+            }
+
+            .hero-text {
+                text-align: center;
+            }
+
+            #mobile-menu {
+                animation: slideDown 0.3s ease-out;
+            }
+
+            @keyframes slideDown {
+                from {
+                    transform: translateY(-10px);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateY(0);
+                    opacity: 1;
+                }
+            }
+        }
+
+        .about-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(138, 43, 226, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(75, 52, 233, 0.03) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .about-lines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(45deg, transparent 48%, rgba(138, 43, 226, 0.02) 49%, rgba(138, 43, 226, 0.02) 51%, transparent 52%) 0 0/60px 60px,
+                linear-gradient(-45deg, transparent 48%, rgba(75, 52, 233, 0.02) 49%, rgba(75, 52, 233, 0.02) 51%, transparent 52%) 0 0/60px 60px;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .project-selector {
+            transition: all 0.3s ease;
+        }
+
+        .project-selector:hover {
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+<body>
+    <!-- Liquid Gradient Background -->
+    <div class="bg-liquid-gradient"></div>
+
+    <!-- SVG Background Pattern -->
+    <svg class="svg-bg" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <pattern id="grid" width="80" height="80" patternUnits="userSpaceOnUse">
+                <path d="M 80 0 L 0 0 0 80" fill="none" stroke="rgba(138, 43, 226, 0.05)" stroke-width="1"/>
+            </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#grid)" />
+    </svg>
+
+    <header class="fixed top-0 left-0 w-full z-50 glass-morphism">
+        <nav class="container mx-auto flex justify-between items-center p-4">
+            <div class="flex items-center space-x-2">
+                <img src="images/cardPocket_logo.png" alt="EcoCard Logo" class="h-12">
+                <div class="text-2xl font-bold gradient-text">EcoCard</div>
+            </div>
+            
+            <!-- Project Selector -->
+            <div class="flex items-center space-x-4">
+                <a href="index.html" class="project-selector glass-morphism px-4 py-2 rounded-lg text-gray-300 hover:text-cyan-400 transition">
+                    <span class="hidden md:inline">Digital Cards</span>
+                    <span class="md:hidden">Cards</span>
+                </a>
+                <a href="laptop-initiative.html" class="project-selector glass-morphism px-4 py-2 rounded-lg bg-purple-900/30 text-white transition">
+                    <span class="hidden md:inline">Laptop Initiative</span>
+                    <span class="md:hidden">Laptops</span>
+                </a>
+            </div>
+            
+            <!-- Mobile menu button -->
+            <button class="md:hidden text-gray-300 hover:text-purple-400 transition" id="mobile-menu-button">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+    
+            <!-- Desktop menu -->
+            <div class="hidden md:flex space-x-4">
+                <a href="#overview" class="text-gray-300 hover:text-purple-400 transition">Overview</a>
+                <a href="#features" class="text-gray-300 hover:text-purple-400 transition">Features</a>
+                <a href="#benefits" class="text-gray-300 hover:text-purple-400 transition">Benefits</a>
+                <a href="#contact" class="text-gray-300 hover:text-purple-400 transition">Contact</a>
+            </div>
+        </nav>
+    
+        <!-- Mobile menu dropdown -->
+        <div class="md:hidden hidden" id="mobile-menu">
+            <div class="px-4 py-2 space-y-3 glass-morphism">
+                <a href="#overview" class="block text-gray-300 hover:text-purple-400 transition py-2">Overview</a>
+                <a href="#features" class="block text-gray-300 hover:text-purple-400 transition py-2">Features</a>
+                <a href="#benefits" class="block text-gray-300 hover:text-purple-400 transition py-2">Benefits</a>
+                <a href="#contact" class="block text-gray-300 hover:text-purple-400 transition py-2">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section with Enhanced Animations -->
+        <section class="hero-section min-h-screen flex items-center justify-center relative overflow-hidden">
+            <div class="container mx-auto px-4 relative z-10">
+                <div class="grid md:grid-cols-2 items-center gap-12">
+                    <div class="hero-text">
+                        <h1 class="text-5xl md:text-6xl font-bold mb-6 gradient-text reveal-text">
+                            Bridging the Digital Divide
+                        </h1>
+                        <p class="text-xl text-gray-300 mb-8 max-w-2xl reveal-subtitle">
+                            Empowering Ugandan students with affordable laptops and internet access for a brighter future
+                        </p>
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <a href="#overview" class="cta-button bg-purple-700 hover:bg-purple-800 text-white px-8 py-3 rounded-full transition reveal-cta text-center">
+                                Learn More
+                            </a>
+                            <a href="#contact" class="cta-button border border-purple-700 hover:bg-purple-700/20 text-white px-8 py-3 rounded-full transition reveal-cta text-center">
+                                Partner With Us
+                            </a>
+                        </div>
+                    </div>
+                    <div class="hero-image-container">
+                        <img src="images/students.png" alt="Students with laptops" class="hero-image rounded-xl">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Overview Section -->
+        <section id="overview" class="py-20 bg-black/50 relative overflow-hidden">
+            <!-- Background Patterns -->
+            <div class="about-pattern"></div>
+            <div class="about-lines"></div>
+            
+            <div class="container mx-auto px-4 relative z-10">
+                <h2 class="text-4xl text-center mb-12 gradient-text">Transforming Education in Uganda</h2>
+                <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-4 gradient-text">Our Mission</h3>
+                        <p class="text-gray-300 mb-4">
+                            EcoCard's Laptop Initiative stands at the forefront of Uganda's digital transformation, merging educational technology with environmental responsibility. We are committed to revolutionizing the educational landscape while reducing our environmental footprint.
+                        </p>
+                        <p class="text-gray-300 mb-6">
+                            By providing affordable laptops to secondary school students across Uganda, we aim to bridge the digital divide, improve digital literacy, and ensure equal educational opportunities for all students regardless of their background.
+                        </p>
+                        <div class="glass-morphism p-6 rounded-xl">
+                            <h4 class="text-xl font-semibold mb-3 gradient-text">Our Impact</h4>
+                            <div class="grid grid-cols-2 gap-4 text-center">
+                                <div>
+                                    <p class="text-3xl font-bold gradient-text">2,500+</p>
+                                    <p class="text-gray-400">Students Reached</p>
+                                </div>
+                                <div>
+                                    <p class="text-3xl font-bold gradient-text">15+</p>
+                                    <p class="text-gray-400">Schools Participating</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="glass-morphism p-6 rounded-xl">
+                        <h3 class="text-xl font-semibold mb-4 gradient-text">Key Features</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-purple-500 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span>Affordable touchscreen laptops convertible to tablets</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-purple-500 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span>Free one-year insurance and maintenance</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-purple-500 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span>Controlled Wi-Fi access for educational purposes</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-purple-500 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span>Flexible payment options for parents</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-purple-500 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span>Holiday e-learning and creative project programs</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Laptop Specifications Section -->
+        <section id="features" class="py-20 bg-black/70">
+            <div class="container mx-auto px-4">
+                <h2 class="text-4xl text-center mb-12 gradient-text">Laptop Specifications</h2>
+                <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                    <!-- 13-inch Model -->
+                    <div class="text-center feature-card glass-morphism p-6 rounded-xl transition-transform duration-300 hover:scale-105">
+                        <div class="mb-6">
+                            <br>
+                            <img src="images/dell13.png" alt="13-inch Laptop Model" class="rounded-lg mx-auto">
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2 gradient-text">13-inch Touchscreen Laptop</h3>
+                        <p class="text-3xl font-bold mb-4">$350 USD</p>
+                        <p class="text-gray-400 mb-4">Approx. 1,555,000 UGX</p>
+                        <ul class="text-left space-y-2 mb-6">
+                            <li class="flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-purple-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span>16GB RAM</span>
+                            </li>
+                            <li class="flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-purple-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span>Convertible to tablet</span>
+                            </li>
+                            <li class="flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-purple-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span>Compact & portable design</span>
+                            </li>
+                            <li class="flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-purple-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span>Free insurance (1 year)</span>
+                            </li>
+                            <li class="flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-purple-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span>Free maintenance (1 year)</span>
+                            </li>
+                        </ul>
+                        <button class="w-full bg-purple-700 hover:bg-purple-800 text-white p-3 rounded-lg transition">
+                            Learn More
+                        </button>
+                    </div>
+                    
+                    <!-- 15-inch Model -->
+                    <div class="text-center feature-card glass-morphism p-6 rounded-xl transition-transform duration-300 hover:scale-105">
+                        <div class="mb-6">
+                            <img src="images/dell15.png" alt="15-inch Laptop Model" class="rounded-lg mx-auto">
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2 gradient-text">15-inch Touchscreen Laptop</h3>
+                        <p class="text-3xl font-bold mb-4">$450 USD</p>
+                        <p class="text-gray-400 mb-4">Approx. 1,655,000 UGX</p>
+                        <ul class="text-left space-y-2 mb-6">
+                            <li class="flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-purple-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span>16GB RAM</span>
+                            </li>
+                            <li class="flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-purple-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span>Convertible to tablet</span>
+                            </li>
+                            <li class="flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-purple-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span>Larger screen for detailed work</span>
+                            </li>
+                            <li class="flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-purple-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span>Free insurance (1 year)</span>
+                            </li>
+                            <li class="flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-purple-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span>Free maintenance (1 year)</span>
+                            </li>
+                        </ul>
+                        <button class="w-full bg-purple-700 hover:bg-purple-800 text-white p-3 rounded-lg transition">
+                            Learn More
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Payment Options Section -->
+        <section class="py-20 bg-black/50">
+            <div class="container mx-auto px-4">
+                <h2 class="text-4xl text-center mb-12 gradient-text">Flexible Payment Options</h2>
+                <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-8">
+                    <!-- Full Payment Option -->
+                    <div class="glass-morphism p-6 rounded-xl">
+                        <h3 class="text-2xl font-semibold mb-4 gradient-text text-center">Full Payment</h3>
+                        <div class="space-y-4 mb-6">
+                            <div class="border border-purple-500/30 p-4 rounded-lg">
+                                <h4 class="text-lg font-medium mb-2">13-inch Laptop</h4>
+                                <p class="text-2xl font-bold mb-1">$350 USD</p>
+                                <p class="text-sm text-gray-400">Approx. 1,555,000 UGX</p>
+                            </div>
+                            <div class="border border-purple-500/30 p-4 rounded-lg">
+                                <h4 class="text-lg font-medium mb-2">15-inch Laptop</h4>
+                                <p class="text-2xl font-bold mb-1">$450 USD</p>
+                                <p class="text-sm text-gray-400">Approx. 1,655,000 UGX</p>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <p class="text-gray-300 mb-4">Includes all services:</p>
+                            <ul class="text-gray-400 space-y-2 mb-6">
+                                <li>✓ Annual insurance</li>
+                                <li>✓ Annual maintenance</li>
+                                <li>✓ Internet access</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Installment Option -->
+                    <div class="glass-morphism p-6 rounded-xl">
+                        <h3 class="text-2xl font-semibold mb-4 gradient-text text-center">3-Phase Installment</h3>
+                        
+                        <!-- 13-inch Installment -->
+                        <div class="border border-purple-500/30 p-4 rounded-lg mb-6">
+                            <h4 class="text-lg font-medium mb-2">13-inch Laptop</h4>
+                            <p class="text-2xl font-bold mb-1">$420 USD Total</p>
+                            <p class="text-sm text-gray-400 mb-4">Approx. 1,866,000 UGX</p>
+                            
+                            <div class="space-y-2">
+                                <div class="flex justify-between">
+                                    <span>1st Installment:</span>
+                                    <span>$140 USD</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>2nd Installment:</span>
+                                    <span>$140 USD</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>3rd Installment:</span>
+                                    <span>$140 USD</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 15-inch Installment -->
+                        <div class="border border-purple-500/30 p-4 rounded-lg">
+                            <h4 class="text-lg font-medium mb-2">15-inch Laptop</h4>
+                            <p class="text-2xl font-bold mb-1">$540 USD Total</p>
+                            <p class="text-sm text-gray-400 mb-4">Approx. 1,986,000 UGX</p>
+                            
+                            <div class="space-y-2">
+                                <div class="flex justify-between">
+                                    <span>1st Installment:</span>
+                                    <span>$180 USD</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>2nd Installment:</span>
+                                    <span>$180 USD</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>3rd Installment:</span>
+                                    <span>$180 USD</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Benefits Section -->
+        <section id="benefits" class="py-20 bg-black/70">
+            <div class="container mx-auto px-4">
+                <h2 class="text-4xl text-center mb-12 gradient-text">Benefits</h2>
+                
+                <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                    <!-- Benefits for Students -->
+                    <div class="glass-morphism p-6 rounded-xl transition-transform duration-300 hover:scale-105">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto mb-4 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l9-5-9-5-9 5 9 5z" />
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
+                        </svg>
+                        <h3 class="text-xl font-semibold text-center mb-4 gradient-text">Benefits for Students</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-purple-500 mr-2 flex-shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span>Enhanced digital literacy with modern technology</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-purple-500 mr-2 flex-shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span>Access to online educational resources and research</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-purple-500 mr-2 flex-shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span>Development of technology skills for future careers</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-purple-500 mr-2 flex-shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span>Participation in holiday e-learning programs</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Benefits for Schools -->
+                    <div class="glass-morphism p-6 rounded-xl transition-transform duration-300 hover:scale-105">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto mb-4 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                        </svg>
+                        <h3 class="text-xl font-semibold text-center mb-4 gradient-text">Benefits for Schools</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-purple-500 mr-2 flex-shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span>Modernized teaching facilities and infrastructure</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-purple-500 mr-2 flex-shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span>Improved school reputation as technology adopters</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-purple-500 mr-2 flex-shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span>Enhanced teaching capabilities with digital tools</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-purple-500 mr-2 flex-shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span>Ability to offer competitive educational programs</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Benefits for Parents -->
+                    <div class="glass-morphism p-6 rounded-xl transition-transform duration-300 hover:scale-105">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto mb-4 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                        </svg>
+                        <h3 class="text-xl font-semibold text-center mb-4 gradient-text">Benefits for Parents</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-purple-500 mr-2 flex-shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span>Affordable access to high-quality technology</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-purple-500 mr-2 flex-shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span>Flexible payment options to ease financial burden</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-purple-500 mr-2 flex-shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span>Peace of mind with insurance and maintenance</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-purple-500 mr-2 flex-shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span>Productive holiday activities for children</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="py-20 bg-black/50 relative overflow-hidden">
+            <div class="about-pattern"></div>
+            <div class="about-lines"></div>
+            <div class="container mx-auto px-4 relative z-10">
+                <h2 class="text-4xl text-center mb-12 gradient-text">Success Stories</h2>
+                
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                    <!-- Testimonial 1 -->
+                    <div class="glass-morphism p-6 rounded-xl transition-transform duration-300 hover:scale-105">
+                        <div class="flex items-center mb-4">
+                            <div class="w-16 h-16 rounded-full bg-purple-700 flex items-center justify-center text-2xl font-bold text-white mr-4">
+                                KH
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-semibold gradient-text">Kampala High School</h4>
+                                <p class="text-gray-400">Partner since 2023</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-300 mb-4">
+                            "The EcoCard Laptop Initiative has transformed our computer science curriculum. Our students are now more engaged and learning technical skills that prepare them for university and beyond."
+                        </p>
+                        <p class="text-right text-purple-400 font-medium">- Headmaster Samuel Okello</p>
+                    </div>
+                    
+                    <!-- Testimonial 2 -->
+                    <div class="glass-morphism p-6 rounded-xl transition-transform duration-300 hover:scale-105">
+                        <div class="flex items-center mb-4">
+                            <div class="w-16 h-16 rounded-full bg-purple-700 flex items-center justify-center text-2xl font-bold text-white mr-4">
+                                JN
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-semibold gradient-text">Jane Namukwaya</h4>
+                                <p class="text-gray-400">Student, S5</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-300 mb-4">
+                            "Having my own laptop has opened so many opportunities for me. I can now research, complete assignments, and even learn coding during school holidays. My dream of becoming a software engineer feels possible now."
+                        </p>
+                        <p class="text-right text-purple-400 font-medium">- Jane Namukwaya</p>
+                    </div>
+                    
+                    <!-- Testimonial 3 -->
+                    <div class="glass-morphism p-6 rounded-xl transition-transform duration-300 hover:scale-105">
+                        <div class="flex items-center mb-4">
+                            <div class="w-16 h-16 rounded-full bg-purple-700 flex items-center justify-center text-2xl font-bold text-white mr-4">
+                                FM
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-semibold gradient-text">Florence Musoke</h4>
+                                <p class="text-gray-400">Parent</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-300 mb-4">
+                            "As a single mother, I was worried about affording a laptop for my son. The installment option made it possible, and seeing how it has improved his grades makes every payment worthwhile. The insurance gives me peace of mind."
+                        </p>
+                        <p class="text-right text-purple-400 font-medium">- Florence Musoke</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQs Section -->
+        <section class="py-20 bg-black/70">
+            <div class="container mx-auto px-4">
+                <h2 class="text-4xl text-center mb-12 gradient-text">Frequently Asked Questions</h2>
+                
+                <div class="max-w-3xl mx-auto space-y-6">
+                    <!-- FAQ Item 1 -->
+                    <div class="glass-morphism p-6 rounded-xl">
+                        <h3 class="text-xl font-semibold mb-3 gradient-text">What is the EcoCard Laptop Initiative?</h3>
+                        <p class="text-gray-300">
+                            The EcoCard Laptop Initiative is a program designed to provide affordable laptop computers to secondary school students in Uganda, bridging the digital divide and enhancing educational opportunities through technology access.
+                        </p>
+                    </div>
+                    
+                    <!-- FAQ Item 2 -->
+                    <div class="glass-morphism p-6 rounded-xl">
+                        <h3 class="text-xl font-semibold mb-3 gradient-text">How does the payment plan work?</h3>
+                        <p class="text-gray-300">
+                            We offer two payment options: a one-time full payment or a three-phase installment plan. The installment plan allows parents to spread the cost over time, making the laptops more accessible to families across different income levels.
+                        </p>
+                    </div>
+                    
+                    <!-- FAQ Item 3 -->
+                    <div class="glass-morphism p-6 rounded-xl">
+                        <h3 class="text-xl font-semibold mb-3 gradient-text">What happens if the laptop gets damaged?</h3>
+                        <p class="text-gray-300">
+                            All laptops come with a one-year insurance and maintenance plan at no extra cost. This covers most repairs and replacements for accidental damage. After the first year, parents can choose to extend the coverage for a small fee.
+                        </p>
+                    </div>
+                    
+                    <!-- FAQ Item 4 -->
+                    <div class="glass-morphism p-6 rounded-xl">
+                        <h3 class="text-xl font-semibold mb-3 gradient-text">How is internet access controlled?</h3>
+                        <p class="text-gray-300">
+                            The laptops are configured with controlled Wi-Fi access that prioritizes educational websites and resources. This ensures students use the laptops primarily for learning while still having access to necessary online tools.
+                        </p>
+                    </div>
+                    
+                    <!-- FAQ Item 5 -->
+                    <div class="glass-morphism p-6 rounded-xl">
+                        <h3 class="text-xl font-semibold mb-3 gradient-text">What are the holiday e-learning programs?</h3>
+                        <p class="text-gray-300">
+                            During school holidays, we offer structured e-learning courses and creative project challenges. These programs keep students engaged with their laptops in productive ways, developing skills in coding, digital design, research, and more.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact & Partnership Section -->
+        <section id="contact" class="py-20 bg-black/50 relative">
+            <div class="about-pattern"></div>
+            <div class="about-lines"></div>
+            <div class="container mx-auto px-4 relative z-10">
+                <h2 class="text-4xl text-center mb-12 gradient-text">Partner With Us</h2>
+                
+                <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-8">
+                    <!-- Contact Form -->
+                    <div class="glass-morphism p-6 rounded-xl">
+                        <h3 class="text-2xl font-semibold mb-6 gradient-text">Get In Touch</h3>
+                        <form class="space-y-4">
+                            <div>
+                                <label class="block text-gray-300 mb-2" for="name">Name</label>
+                                <input type="text" id="name" class="w-full bg-gray-900 border border-gray-700 rounded-lg p-3 text-white focus:border-purple-500 focus:ring-2 focus:ring-purple-500 focus:outline-none transition" placeholder="Your Name">
+                            </div>
+                            <div>
+                                <label class="block text-gray-300 mb-2" for="email">Email</label>
+                                <input type="email" id="email" class="w-full bg-gray-900 border border-gray-700 rounded-lg p-3 text-white focus:border-purple-500 focus:ring-2 focus:ring-purple-500 focus:outline-none transition" placeholder="your@email.com">
+                            </div>
+                            <div>
+                                <label class="block text-gray-300 mb-2" for="organization">Organization</label>
+                                <input type="text" id="organization" class="w-full bg-gray-900 border border-gray-700 rounded-lg p-3 text-white focus:border-purple-500 focus:ring-2 focus:ring-purple-500 focus:outline-none transition" placeholder="School or Organization Name">
+                            </div>
+                            <div>
+                                <label class="block text-gray-300 mb-2" for="message">Message</label>
+                                <textarea id="message" rows="4" class="w-full bg-gray-900 border border-gray-700 rounded-lg p-3 text-white focus:border-purple-500 focus:ring-2 focus:ring-purple-500 focus:outline-none transition" placeholder="Tell us how we can help..."></textarea>
+                            </div>
+                            <button type="submit" class="w-full bg-purple-700 hover:bg-purple-800 text-white font-medium py-3 px-4 rounded-lg transition">
+                                Send Message
+                            </button>
+                        </form>
+                    </div>
+                    
+                    <!-- Partnership Info -->
+                    <div>
+                        <div class="glass-morphism p-6 rounded-xl mb-6">
+                            <h3 class="text-2xl font-semibold mb-4 gradient-text">For Schools</h3>
+                            <p class="text-gray-300 mb-4">
+                                Join our growing network of partner schools bringing technology to the classroom. We offer special packages for schools including:
+                            </p>
+                            <ul class="space-y-2 mb-6">
+                                <li class="flex items-start">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-purple-500 mr-2 flex-shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                    <span>Bulk discounts on laptop purchases</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-purple-500 mr-2 flex-shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                    <span>Free teacher training workshops</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-purple-500 mr-2 flex-shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                    <span>Curriculum integration support</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="glass-morphism p-6 rounded-xl mb-6">
+                            <h3 class="text-2xl font-semibold mb-4 gradient-text">For Corporate Partners</h3>
+                            <p class="text-gray-300 mb-4">
+                                Support our mission through CSR initiatives. Sponsor laptops for underprivileged students or entire schools as part of your community outreach.
+                            </p>
+                            <p class="text-gray-300">
+                                Contact us to discuss customized partnership opportunities that align with your organizational values.
+                            </p>
+                        </div>
+                        
+                        <div class="glass-morphism p-6 rounded-xl">
+                            <h3 class="text-2xl font-semibold mb-4 gradient-text">Contact Information</h3>
+                            <div class="space-y-4">
+                                <div class="flex items-start">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-purple-500 mr-3 flex-shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    </svg>
+                                    <div>
+                                        <p class="font-medium">Address:</p>
+                                        <p class="text-gray-400">Plot 45, Kampala Road, Kampala, Uganda</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-purple-500 mr-3 flex-shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                    </svg>
+                                    <div>
+                                        <p class="font-medium">Email:</p>
+                                        <p class="text-gray-400">info@ecocard-uganda.com</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-purple-500 mr-3 flex-shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                                    </svg>
+                                    <div>
+                                        <p class="font-medium">Phone:</p>
+                                        <p class="text-gray-400">+256 701 234 567</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="py-10 bg-black/80">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <img src="images/cardPocket_logo.png" alt="EcoCard Logo" class="h-10">
+                        <div class="text-xl font-bold gradient-text">EcoCard</div>
+                    </div>
+                    <p class="text-gray-400 mb-4">
+                        Bridging the digital divide in Uganda through sustainable technology solutions.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-purple-400 transition">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-purple-400 transition">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6.066 9.645c.183 4.04-2.83 8.544-8.164 8.544-1.622 0-3.131-.476-4.402-1.291 1.524.18 3.045-.244 4.252-1.189-1.256-.023-2.317-.854-2.684-1.995.451.086.895.061 1.298-.049-1.381-.278-2.335-1.522-2.304-2.853.388.215.83.344 1.301.359-1.279-.855-1.641-2.544-.889-3.835 1.416 1.738 3.533 2.881 5.92 3.001-.419-1.796.944-3.527 2.799-3.527.825 0 1.572.349 2.096.907.654-.128 1.27-.368 1.824-.697-.215.671-.67 1.233-1.263 1.589.581-.07 1.135-.224 1.649-.453-.384.578-.87 1.084-1.433 1.489z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-purple-400 transition">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6.066 9.645c.183 4.04-2.83 8.544-8.164 8.544-1.622 0-3.131-.476-4.402-1.291 1.524.18 3.045-.244 4.252-1.189-1.256-.023-2.317-.854-2.684-1.995.451.086.895.061 1.298-.049-1.381-.278-2.335-1.522-2.304-2.853.388.215.83.344 1.301.359-1.279-.855-1.641-2.544-.889-3.835 1.416 1.738 3.533 2.881 5.92 3.001-.419-1.796.944-3.527 2.799-3.527.825 0 1.572.349 2.096.907.654-.128 1.27-.368 1.824-.697-.215.671-.67 1.233-1.263 1.589.581-.07 1.135-.224 1.649-.453-.384.578-.87 1.084-1.433 1.489z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold gradient-text mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#about" class="text-gray-400 hover:text-purple-400 transition">About Us</a></li>
+                        <li><a href="#features" class="text-gray-400 hover:text-purple-400 transition">Features</a></li>
+                        <li><a href="#benefits" class="text-gray-400 hover:text-purple-400 transition">Benefits</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-purple-400 transition">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold gradient-text mb-4">Contact Us</h4>
+                    <p class="text-gray-400 mb-2">
+                        Plot 45, Kampala Road, Kampala, Uganda
+                    </p>
+                    <p class="text-gray-400 mb-2">
+                        info@ecocard-uganda.com<br>
+                        +256 701 234 567
+                        </p>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-semibold gradient-text mb-4">Legal</h4>
+                            <ul class="space-y-2">
+                                <li><a href="#" class="text-gray-400 hover:text-purple-400 transition">Privacy Policy</a></li>
+                                <li><a href="#" class="text-gray-400 hover:text-purple-400 transition">Terms of Service</a></li>
+                                <li><a href="#" class="text-gray-400 hover:text-purple-400 transition">Cookie Policy</a></li>
+                            </ul>
+                        </div>
+                        </div>
+                        <div class="border-t border-gray-800 pt-8">
+                            <p class="text-center text-gray-400">
+                                © 2024 EcoCard Laptop Initiative. All rights reserved.
+                            </p>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
